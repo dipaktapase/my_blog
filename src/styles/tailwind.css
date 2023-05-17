@@ -494,6 +494,9 @@ video {
 .inline {
   display: inline;
 }
+.w-full {
+  width: 100%;
+}
 .max-w-screen-md {
   max-width: 768px;
 }
