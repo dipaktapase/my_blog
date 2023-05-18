@@ -4,18 +4,21 @@ const articles = [
     title: "The fastest way to learn React",
     thumbnail: "/images/blog1.jpg",
     content: ["Hello Welcome to this article for learning react quick."],
+    date: "2020-01-01",
   },
   {
     name: "learn-web",
     title: "The fastest way to learn web",
     thumbnail: "./images/blog2.jpg",
     content: ["Hello Welcome to this article for learning web quick."],
+    date: "2020-01-08",
   },
   {
     name: "learn-js",
     title: "The fastest way to learn js",
     thumbnail: "./images/blog3.jpg",
     content: ["Hello Welcome to this article for learning js quick."],
+    date: "2020-01-09",
   },
 ];
 
