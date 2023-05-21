@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import articles from "./article-content";
 import Articles from "../components/Articles";
+import "whatwg-fetch";
+import CommentsList from "../components/CommentsList";
 
 const Article = () => {
   const name = useParams();
   const article = articles.find((article) => article.name === name.name);
-  if (!article) return <h1>Article does not exist.</h1>
-  const otherArticles = articles.filter((article) => article.name !== name.name)
-  
+
+  const [articleInfo, setArticleInfo] = useState({ comments: [] });
+
+  useEffect(() => {
+    const fetchData = async () => {
+        const result = await fetch(`/api/articles/${name.name}`);
+        const body = await result.json();
+        console.log(body);
+        setArticleInfo(body);
+    };
+    fetchData();
+}, [name.name]);
+
+  if (!article) return <h1>Article does not exist.</h1>;
+  const otherArticles = articles.filter(
+    (article) => article.name !== name.name
+  );
+
   return (
     <div className="mb-20">
       <h1 className="sm:text-4xl text-2xl font-bold mb-6 text-grey-900">
@@ -19,6 +36,8 @@ const Article = () => {
           {paragraph}
         </p>
       ))}
+      <CommentsList comments={articleInfo.comments} />
+
       <h1 className="sm:text-2x text-xl font-bold mt-4 mb-4 text-gray-900">
         Other Articles:
       </h1>
@@ -30,4 +49,3 @@ const Article = () => {
 };
 
 export default Article;
- 
