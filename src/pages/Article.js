@@ -4,6 +4,7 @@ import articles from "./article-content";
 import Articles from "../components/Articles";
 import "whatwg-fetch";
 import CommentsList from "../components/CommentsList";
+import AddCommentForm from "../components/AddCommentForm";
 
 const Article = () => {
   const name = useParams();
@@ -13,13 +14,13 @@ const Article = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-        const result = await fetch(`/api/articles/${name.name}`);
-        const body = await result.json();
-        console.log(body);
-        setArticleInfo(body);
+      const result = await fetch(`/api/articles/${name.name}`);
+      const body = await result.json();
+      console.log(body);
+      setArticleInfo(body);
     };
     fetchData();
-}, [name.name]);
+  }, [name.name]);
 
   if (!article) return <h1>Article does not exist.</h1>;
   const otherArticles = articles.filter(
@@ -36,7 +37,9 @@ const Article = () => {
           {paragraph}
         </p>
       ))}
+
       <CommentsList comments={articleInfo.comments} />
+      <AddCommentForm articleName={name} setArticleInfo={setArticleInfo} />
 
       <h1 className="sm:text-2x text-xl font-bold mt-4 mb-4 text-gray-900">
         Other Articles:
